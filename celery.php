@@ -95,7 +95,7 @@ class Celery
 	 * @param array $args Array of arguments (kwargs call when $args is associative)
 	 * @return AsyncResult
 	 */
-	function PostTask($task, $args, $async_result=true)
+	function PostTask($task, $args, $kwargs = array(), $async_result=true)
 	{
 		if(!is_array($args))
 		{
@@ -103,23 +103,11 @@ class Celery
 		}
 		$id = uniqid('php_', TRUE);
 
-		/* $args is numeric -> positional args */
-		if(array_keys($args) === range(0, count($args) - 1))
-		{
-			$kwargs = array();
-		}
-		/* $args is associative -> contains kwargs */
-		else
-		{
-			$kwargs = $args;
-			$args = array();
-		}
-                                                                            
 		$task_array = array(
 			'id' => $id,
 			'task' => $task,
 			'args' => $args,
-			'kwargs' => (object)$kwargs,
+			'kwargs' => $kwargs,
 		);
 		$task = json_encode($task_array);
 		$params = array('content_type' => 'application/json',
