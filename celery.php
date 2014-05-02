@@ -107,7 +107,7 @@ class Celery
 			'id' => $id,
 			'task' => $task,
 			'args' => $args,
-			'kwargs' => $kwargs,
+			'kwargs' => (object)$kwargs,
 		);
 		$task = json_encode($task_array);
 		$params = array('content_type' => 'application/json',
