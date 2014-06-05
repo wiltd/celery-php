@@ -3,7 +3,7 @@
 /* TODO documentation is completely missing */
 
 /* Include Composer installed packages if available */
-@include_once('vendor/autoload.php');
+//@include_once('vendor/autoload.php');
 
 /* Include namespaced code only if PhpAmqpLib available */
 if(class_exists('PhpAmqpLib\Connection\AMQPConnection'))
